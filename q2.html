@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+     <div>
+        <br>
+
+        <br>
+        <button id="q2">click to change the text of the following paragraph</button>
+    </div>
+    <p id="q2Para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil consequuntur aliquam sit.</p>
+    <br>
+
+    <script>    const q2 = document.getElementById("q2");
+    const q2Para = document.getElementById("q2Para");
+    function changeInnerText(){
+        q2Para.innerText = "Q2 solved"
+    }
+    q2.onclick = ()=> changeInnerText();</script>
+    
+</body>
+</html>

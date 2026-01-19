@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div>
+        <br>
+        <button id="q5">Get Time And Date</button>
+    </div>
+    <script>
+            const q5 = document.getElementById("q5");
+    q5.onclick = () => {
+        const newDiv = document.createElement("div")
+        const date = new Date();
+        date.getTime()
+        newDiv.textContent =  date;
+        q5.after(newDiv);
+    }
+    </script>
+</body>
+</html>
