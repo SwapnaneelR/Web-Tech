@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1</title>
+</head>
+
+<body>
+    <form action="" onsubmit="handleSubmit(event)">
+        <h1>Input validation</h1>
+        <input id="inputValue" type="text" style="padding: 20px;" placeholder="enter a number bw 0 to 999">
+    </form>
+</body>
+<script>
+    function handleSubmit(event) { 
+        event.preventDefault();
+        let value = document.getElementById("inputValue").value;
+        let st = String(value);
+        let f = 1;
+        for(let i=0;i<st.length;i++){
+            if(st.charAt(i)>='0'&& st.charAt(i)<='9')
+            continue;
+            f = 0;
+            break;
+        }
+        if(f==0){
+            print("Invalid Input Type (enter number only)");
+            return;
+        }
+        let num = Number(value);
+        const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+        const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+
+        function numberToWords(n) {
+            if (n === 0) return "zero";
+            if (n < 20) return ones[n];
+            if (n < 100) return tens[Math.floor(n / 10)] + (n % 10 !== 0 ? "-" + ones[n % 10] : "");
+            if (n < 1000) return ones[Math.floor(n / 100)] + " hundred" + (n % 100 !== 0 ? " and " + numberToWords(n % 100) : "");
+
+            return "Number too large";
+        }
+        print(numberToWords(num));
+        function print(ans){
+            const el = document.createElement("p");
+            el.innerText = ans;
+            document.body.appendChild(el);
+        }
+    }
+</script>
+
+</html>

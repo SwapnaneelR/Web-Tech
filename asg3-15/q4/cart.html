@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Online Shopping Cart</title>
+</head>
+<body>
+    <h1>Product Catalogue</h1>
+
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Add to Cart</th>
+        </tr>
+
+        <tr>
+            <td>Mobile Phone</td>
+            <td>$300</td>
+            <td><button onclick="addToCart('Mobile Phone', 300)">Add</button></td>
+        </tr>
+
+        <tr>
+            <td>Laptop</td>
+            <td>$800</td>
+            <td><button onclick="addToCart('Laptop', 800)">Add</button></td>
+        </tr>
+
+        <tr>
+            <td>Headphones</td>
+            <td>$50</td>
+            <td><button onclick="addToCart('Headphones', 50)">Add</button></td>
+        </tr>
+    </table>
+
+    <h2>Your Cart</h2>
+    <table border="1" cellpadding="10" cellspacing="0" id="cartTable">
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </table>
+
+    <h3>Total Amount: $<span id="totalAmount">0</span></h3>
+
+    <script>
+        let cart = [];
+
+        function addToCart(product, price) {
+            // Check if product already exists in cart
+            let found = cart.find(item => item.name === product);
+            if (found) {
+                found.quantity += 1;
+            } else {
+                cart.push({name: product, price: price, quantity: 1});
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            let table = document.getElementById('cartTable');
+            let total = 0;
+
+            // Clear all rows except header
+            table.innerHTML = `<tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>`;
+
+            cart.forEach(item => {
+                let row = table.insertRow();
+                row.insertCell(0).innerText = item.name;
+                row.insertCell(1).innerText = '$' + item.price;
+                row.insertCell(2).innerText = item.quantity;
+                total += item.price * item.quantity;
+            });
+
+            document.getElementById('totalAmount').innerText = total;
+        }
+    </script>
+</body>
+</html>
