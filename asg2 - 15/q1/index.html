@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Question 1</title>
+</head>
+
+<body>
+    <h1>Check even or Odd</h1>
+    <form onsubmit="checkParity(event)">
+        <input id="ii" name="x" type="text">
+    </form>
+</body>
+<script>
+    function checkParity(event) {
+        event.preventDefault();
+        let x = document.getElementById("ii").value;
+        if (x % 2 == 0)
+            display("Even");
+        else
+            display("Odd");
+    }
+    function display(st) {
+        const el = document.createElement("p");
+        el.innerText = st;
+        document.body.appendChild(el);
+    }
+</script>
+
+</html>

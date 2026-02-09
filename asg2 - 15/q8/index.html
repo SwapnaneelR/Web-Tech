@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Question 8</title>
+    <style>
+        #msg {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Input Field Checker</h1>
+
+    <form onsubmit="checkInput(event)"> 
+        <input id="ii" type="text" placeholder="enter some text">
+        <input type="submit" value="Submit">
+    </form>
+
+    <p id="msg"></p>
+
+    <script>
+        function checkInput(event) {
+            event.preventDefault();
+
+            let input = document.getElementById("ii");
+            let message = document.getElementById("msg");
+            let s = input.value.trim();
+
+            if (s.length === 0) {
+                message.textContent = "Nothing entered!";
+                message.style.color = "red";
+            } else {
+                message.textContent = "You entered: " + s;
+                message.style.color = "green";
+            }
+        }
+    </script>
+</body>
+</html>

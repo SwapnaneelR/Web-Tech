@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Question 5</title>
+
+</head>
+<body>
+    <h1>Date And Time</h1>
+    <button onclick="displayDateTime()">Click Me</button>
+    <p id="result"></p>
+</body>
+<script>
+    function displayDateTime() {
+        var date = new Date();
+        var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+        var dayName = days[(date.getDay() + 6) % 7];
+
+        var currentDate = date.getDate() + "/" + 
+                          (date.getMonth() + 1) + "/" + 
+                          date.getFullYear();
+
+        var currentTime = date.getHours() + ":" + 
+                          date.getMinutes() + ":" + 
+                          date.getSeconds();
+
+        document.getElementById("result").innerHTML =
+            "Day: " + dayName + "<br>" +
+            "Date: " + currentDate + "<br>" +
+            "Time: " + currentTime;
+    }
+</script>
+</html>

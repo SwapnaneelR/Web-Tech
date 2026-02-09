@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Question 9</title> 
+</head>
+<body>
+    <h2>Find the Largest Number</h2>
+
+    <form onsubmit="findLargest(event)">
+        <input type="number" id="n1" placeholder="Enter first number"><br><br>
+        <input type="number" id="n2" placeholder="Enter second number"><br><br>
+        <input type="number" id="n3" placeholder="Enter third number"><br><br>
+        <input type="submit" value="Find Largest">
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        function findLargest(event) {
+            event.preventDefault();
+
+            let a = Number(document.getElementById("n1").value);
+            let b = Number(document.getElementById("n2").value);
+            let c = Number(document.getElementById("n3").value);
+
+            let largest = a;
+
+            if (b > largest) largest = b;
+            if (c > largest) largest = c;
+
+            document.getElementById("result").textContent =
+                "Largest number is: " + largest;
+        }
+    </script>
+</body>
+</html>

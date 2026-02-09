@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Question 2</title>
+</head>
+
+<body>
+    <h1>Show Cube/Square</h1>
+    <input type="text" id="ii">
+    <button onclick="displayCube(event)">Show Cube</button>
+    <button onclick="displaySq(event)">Show Square</button>
+    <button onclick="displayBoth(event) ">Show Both</button>
+</body>
+<script>
+    function cube(x) { return x * x * x; }
+    function square(x) { return x * x; }
+    function displayCube(event) {
+        event.preventDefault();
+        let x = document.getElementById("ii").value;
+        const el = document.createElement("p");
+        el.innerText = (cube(x));
+        document.body.appendChild(el);
+    }
+    function displaySq(event) {
+        event.preventDefault();
+        let x = document.getElementById("ii").value;
+        const el = document.createElement("p");
+        el.innerText = (square(x));
+        document.body.appendChild(el);
+    }
+    function displayBoth(event) {
+        event.preventDefault();
+        displayCube(event);
+        displaySq(event);
+    }
+</script>
+
+</html>

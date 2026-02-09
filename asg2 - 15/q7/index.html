@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <title>Question 7</title>
+</head>
+<body>
+    <h1>Show or Hide Para</h1>
+    <p id="p1">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam vero pariatur, nemo officiis deserunt nulla? Harum voluptate sequi laudantium necessitatibus.</p>
+    <button onclick="toggleView()">Toggle</button>
+</body>
+<script>
+    let counter=1;
+    function toggleView(){
+        let el=document.getElementById("p1");
+        if(counter%2)
+        el.style.display = "none"
+        else
+        el.style.display = "flex";
+        counter++;
+    }
+</script>
+</html>

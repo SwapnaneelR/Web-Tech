@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 6</title>
+</head>
+<body>
+    <h1>Marks Calculator</h1>
+    Subject 1: <input type="number" id="sub1"><br><br>
+    Subject 2: <input type="number" id="sub2"><br><br>
+    Subject 3: <input type="number" id="sub3"><br><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <h3 id="total"></h3>
+    <h3 id="average"></h3>
+    <h3 id="result"></h3>
+
+    <script>
+        function calculate() {
+            let s1 = Number(document.getElementById("sub1").value);
+            let s2 = Number(document.getElementById("sub2").value);
+            let s3 = Number(document.getElementById("sub3").value);
+
+            let total = s1 + s2 + s3;
+            let avg = total / 3;
+
+            document.getElementById("total").innerHTML = "Total Marks: " + total;
+            document.getElementById("average").innerHTML = "Average Marks: " + avg.toFixed(2);
+
+            if (avg >= 40) {
+                document.getElementById("result").innerHTML = "Result: Pass";
+            } else {
+                document.getElementById("result").innerHTML = "Result: Fail";
+            }
+        }
+    </script>
+
+</body>
+</html>

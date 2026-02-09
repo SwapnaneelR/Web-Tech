@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <title>Question 4</title>
+</head>
+<body>
+    <h1>Background Color Changer</h1>
+    <button onclick="changeBg(event)">Change background color</button>
+</body>
+<script>
+    function changeBg(event){
+        event.preventDefault();
+        arr = ["blue","yellow","pink","black","green"];
+        idx = parseInt(Math.random()*100)%arr.length;
+        console.log(arr[idx]);
+        document.body.style.backgroundColor = arr[idx];    
+    }
+</script>
+</html>
