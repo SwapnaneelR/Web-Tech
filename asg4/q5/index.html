@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 5</title>
+    <style>
+        #timerDisplay { font-size: 3rem; font-weight: bold; color: #333; }
+        .finished { color: red !important; }
+    </style>
+</head>
+<body>
+
+    <h2>Countdown Timer</h2>
+    <input type="number" id="secondsInput" placeholder="Enter seconds">
+    <button onclick="startTimer()">Start Countdown</button>
+
+    <div id="timerDisplay">0</div>
+
+    <script>
+        let countdown; // Variable to hold the interval reference
+
+        function startTimer() {
+            // 1. Clear any existing timer to prevent multiple timers running at once
+            clearInterval(countdown);
+
+            const display = document.getElementById('timerDisplay');
+            const input = document.getElementById('secondsInput');
+            let timeLeft = parseInt(input.value);
+
+            // Basic validation
+            if (isNaN(timeLeft) || timeLeft <= 0) {
+                alert("Please enter a valid number of seconds.");
+                return;
+            }
+
+            // 2. Initial DOM Update
+            display.textContent = timeLeft;
+            display.classList.remove('finished');
+
+            // 3. Start the interval
+            countdown = setInterval(() => {
+                timeLeft--; // Decrement the time
+                
+                // Update the display
+                display.textContent = timeLeft;
+
+                // 4. Check if finished
+                if (timeLeft <= 0) {
+                    clearInterval(countdown); // Stop the loop
+                    display.textContent = "Time Over!";
+                    display.classList.add('finished');
+                }
+            }, 1000); // 1000ms = 1 second
+        }
+    </script>
+</body>
+</html>

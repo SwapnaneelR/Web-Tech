@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Question 7</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .session-container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="session-container">
+        <div id="loginSection">
+            <h3>Login</h3>
+            <input type="text" id="usernameInput" placeholder="Enter Username">
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div id="dashboardSection" class="hidden">
+            <h3 id="welcomeMsg">Welcome back!</h3>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Check for existing session on page load
+        window.onload = function () {
+            const savedUser = localStorage.getItem('userSession');
+
+            if (savedUser) {
+                showDashboard(savedUser);
+            }
+        };
+
+        function login() {
+            const username = document.getElementById('usernameInput').value.trim();
+
+            if (username === "") {
+                alert("Please enter a username.");
+                return;
+            }
+
+            // 2. Save to LocalStorage
+            localStorage.setItem('userSession', username);
+
+            showDashboard(username);
+        }
+
+        function logout() {
+            // 3. Clear from LocalStorage
+            localStorage.removeItem('userSession');
+
+            // Toggle views back
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('usernameInput').value = "";
+        }
+
+        function showDashboard(name) {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            document.getElementById('welcomeMsg').textContent = `Welcome back, ${name}!`;
+        }
+    </script>
+</body>
+
+</html>

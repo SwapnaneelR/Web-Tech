@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 9</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .quiz-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .option-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        #score-container {
+            text-align: center;
+            display: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-card">
+        <div id="quiz-content">
+            <h2 id="question-text">Question loading...</h2>
+            <div id="options-container"></div>
+        </div>
+
+        <div id="score-container">
+            <h2>Quiz Completed!</h2>
+            <p id="final-score"></p>
+            <button onclick="location.reload()" class="option-btn"
+                style="text-align:center; background:#28a745; color:white;">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Data: Array of Objects
+        const quizData = [
+            {
+                question: "Which language runs in a web browser?",
+                options: ["Java", "C", "Python", "JavaScript"],
+                correct: 3 // Index of "JavaScript"
+            },
+            {
+                question: "What does CSS stand for?",
+                options: ["Central Style Sheets", "Cascading Style Sheets", "Control System Sheets"],
+                correct: 1
+            },
+            {
+                question: "What year was JavaScript launched?",
+                options: ["1996", "1995", "1994", "None of the above"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById("question-text");
+        const optionsEl = document.getElementById("options-container");
+        const quizContent = document.getElementById("quiz-content");
+        const scoreContainer = document.getElementById("score-container");
+        const finalScoreEl = document.getElementById("final-score");
+
+        // 2. DOM Dynamic Content: Load Question
+        function loadQuestion() {
+            const currentData = quizData[currentQuestionIndex];
+
+            // Set question text
+            questionEl.innerText = currentData.question;
+
+            // Clear old options and add new ones
+            optionsEl.innerHTML = "";
+            currentData.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.innerText = option;
+                button.classList.add("option-btn");
+                button.onclick = () => handleAnswer(index);
+                optionsEl.appendChild(button);
+            });
+        }
+
+        // 3. Logic: Handle Selection & Scoring
+        function handleAnswer(selectedIndex) {
+            if (selectedIndex === quizData[currentQuestionIndex].correct) {
+                score++;
+            }
+
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizContent.classList.add("hidden");
+            scoreContainer.style.display = "block";
+            finalScoreEl.innerText = `You scored ${score} out of ${quizData.length}!`;
+        }
+
+        // Initialize
+        loadQuestion();
+    </script>
+</body>
+
+</html>

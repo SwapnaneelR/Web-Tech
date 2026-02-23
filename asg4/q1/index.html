@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Question 1</title>
+</head>
+
+<body>
+    <h2>Student List Manager</h2>
+
+    <input type="text" id="studentInput" placeholder="Enter student name...">
+    <button onclick="addStudent()">Add Student</button>
+
+    <p>Total Students: <span id="studentCount">0</span></p>
+
+    <ul id="studentList"></ul>
+
+    <script>
+        function addStudent() {
+            const input = document.getElementById('studentInput');
+            const name = input.value.trim();
+            const list = document.getElementById('studentList');
+
+            if (name === "") {
+                alert("Please enter a name.");
+                return;
+            }
+
+            // 1. Create the <li> element
+            const li = document.createElement('li');
+            li.textContent = name + " ";
+
+            // 2. Create the Remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+
+            // Set up the removal logic
+            removeBtn.onclick = function () {
+                li.remove(); // Removes the specific <li> from the DOM
+                updateCount();
+            };
+
+            // 3. Use appendChild to build the list item
+            li.appendChild(removeBtn);
+            list.appendChild(li);
+
+            // 4. Reset input and update total
+            input.value = "";
+            updateCount();
+        }
+
+        function updateCount() {
+            const count = document.getElementById('studentList').children.length;
+            document.getElementById('studentCount').textContent = count;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 10</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f8f9fa; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Records</h2>
+    
+    <input type="text" id="searchInput" placeholder="Search by name or major..." onkeyup="filterTable()">
+
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Major</th>
+                <th>GPA</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            </tbody>
+    </table>
+</div>
+
+<script>
+    let studentData = [];
+
+    // 1. fetch() and JSON.parse()
+    async function loadStudents() {
+        try {
+            const response = await fetch('students.json');
+            // .json() automatically performs JSON.parse() on the body
+            studentData = await response.json(); 
+            displayData(studentData);
+        } catch (error) {
+            console.error("Error loading JSON:", error);
+            document.getElementById('tableBody').innerHTML = "<tr><td colspan='4'>Error loading data. Make sure you are using a local server!</td></tr>";
+        }
+    }
+
+    // 2. DOM Table Generation
+    function displayData(data) {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = ""; // Clear existing rows
+
+        data.forEach(student => {
+            const row = `<tr>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.major}</td>
+                <td>${student.gpa}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+        });
+    }
+
+    // 3. Search Option Logic
+    function filterTable() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = studentData.filter(student => 
+            student.name.toLowerCase().includes(searchTerm) || 
+            student.major.toLowerCase().includes(searchTerm)
+        );
+        displayData(filtered);
+    }
+
+    // Initialize
+    loadStudents();
+</script>
+
+</body>
+</html>

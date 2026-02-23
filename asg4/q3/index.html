@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 3</title>
+</head>
+<body>
+    <h2>Simple Calculator</h2>
+    
+    <input type="number" id="num1" placeholder="Num 1">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+    <input type="number" id="num2" placeholder="Num 2">
+    
+    <button onclick="calculate()">Calculate</button>
+
+    <h3>Result: <span id="currentResult">0</span></h3>
+
+    <hr>
+    <h4>Last 5 Calculations:</h4>
+    <ul id="historyList"></ul>
+
+    <script>
+        let historyLog = []; // Array to store calculation strings
+
+        function calculate() {
+            const n1 = parseFloat(document.getElementById('num1').value);
+            const n2 = parseFloat(document.getElementById('num2').value);
+            const op = document.getElementById('operator').value;
+            const resultDisplay = document.getElementById('currentResult');
+            
+            if (isNaN(n1) || isNaN(n2)) {
+                alert("Please enter valid numbers");
+                return;
+            }
+
+            let result;
+            // Perform calculation based on operator
+            switch (op) {
+                case '+': result = n1 + n2; break;
+                case '-': result = n1 - n2; break;
+                case '*': result = n1 * n2; break;
+                case '/': result = n2 !== 0 ? n1 / n2 : "Error (Div by 0)"; break;
+            }
+
+            resultDisplay.textContent = result;
+
+            // Create the history string
+            const entry = `${n1} ${op} ${n2} = ${result}`;
+            updateHistory(entry);
+        }
+
+        function updateHistory(newEntry) {
+            // 1. Add new entry to the start of the array
+            historyLog.unshift(newEntry);
+
+            // 2. Limit the array to the last 5 items
+            if (historyLog.length > 5) {
+                historyLog.pop(); // Remove the oldest item
+            }
+
+            // 3. DOM Dynamic Update: Refresh the list
+            const list = document.getElementById('historyList');
+            list.innerHTML = ""; // Clear current list
+
+            historyLog.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

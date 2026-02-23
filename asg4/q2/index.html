@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Question 2</title>
+</head>
+
+<body>
+    <h2>OTP Verification</h2>
+
+    <button onclick="generateOTP()">Generate 6-Digit OTP</button>
+    <p>Your OTP: <strong id="displayOTP">----</strong></p>
+
+    <hr>
+
+    <input type="text" id="userInput" placeholder="Enter OTP here" maxlength="6">
+    <button onclick="verifyOTP()">Verify</button>
+
+    <p id="message"></p>
+
+    <script>
+        let generatedOTP = ""; // Store the OTP globally to verify later
+
+        function generateOTP() {
+            // Math.random() generates a float. 
+            // We floor it to get a whole number between 100000 and 999999.
+            generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+            document.getElementById('displayOTP').textContent = generatedOTP;
+            document.getElementById('message').textContent = ""; // Clear previous messages
+        }
+
+        function verifyOTP() {
+            const userInput = document.getElementById('userInput').value;
+            const messageDisplay = document.getElementById('message');
+
+            if (userInput === "") {
+                messageDisplay.textContent = "Please enter the OTP.";
+                messageDisplay.style.color = "orange";
+                return;
+            }
+
+            // DOM Validation: Compare the stored OTP with user input
+            if (userInput === generatedOTP) {
+                messageDisplay.textContent = "✅ Valid OTP";
+                messageDisplay.style.color = "green";
+            } else {
+                messageDisplay.textContent = "❌ Invalid OTP. Try again.";
+                messageDisplay.style.color = "red";
+            }
+        }
+    </script>
+</body>
+
+</html>

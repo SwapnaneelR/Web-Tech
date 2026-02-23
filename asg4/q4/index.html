@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Question 4</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Live Product Search</h2>
+    <input type="text" id="searchInput" onkeyup="filterList()" placeholder="Search for items...">
+
+    <ul id="itemList">
+        <li>Apple</li>
+        <li>Banana</li>
+        <li>Cherry</li>
+        <li>Date</li>
+        <li>Elderberry</li>
+        <li>Fig</li>
+        <li>Grape</li>
+        <li>Honeydew</li>
+        <li>Iced Tea</li>
+        <li>Jackfruit</li>
+    </ul>
+
+    <script>
+        function filterList() {
+            // 1. Get the search string and convert to lowercase for case-insensitivity
+            const query = document.getElementById('searchInput').value.toLowerCase();
+
+            // 2. Grab all <li> elements from the DOM
+            const listItems = document.querySelectorAll('#itemList li');
+
+            // 3. Loop through items and toggle visibility
+            listItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+
+                // Use includes() to see if the query exists within the item text
+                if (text.includes(query)) {
+                    item.style.display = ""; // Show item
+                } else {
+                    item.style.display = "none"; // Hide item
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

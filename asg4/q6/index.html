@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Question 6
+    </title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 8px;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Create Account</h2>
+    <form id="regForm" onsubmit="return validateForm(event)">
+        <div class="input-group">
+            <input type="text" id="name" placeholder="Full Name">
+            <span id="nameError" class="error"></span>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="email" placeholder="Email Address">
+            <span id="emailError" class="error"></span>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password (Upper + Number)">
+            <span id="passError" class="error"></span>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password">
+            <span id="confirmError" class="error"></span>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Stop form from refreshing the page
+
+            // 1. Reset error messages
+            document.querySelectorAll('.error').forEach(el => el.textContent = "");
+
+            let isValid = true;
+
+            // 2. Name Validation (Not Empty)
+            const name = document.getElementById('name').value.trim();
+            if (name === "") {
+                document.getElementById('nameError').textContent = "Name is required.";
+                isValid = false;
+            }
+
+            // 3. Email Validation (Regex)
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = "Enter a valid email address.";
+                isValid = false;
+            }
+
+            // 4. Password Strength (Uppercase + Number)
+            const password = document.getElementById('password').value;
+            const passRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            // ^ Requires 8 chars, 1 uppercase, 1 number
+            if (!passRegex.test(password)) {
+                document.getElementById('passError').textContent = "Must be 8+ chars with 1 Uppercase & 1 Number.";
+                isValid = false;
+            }
+
+            // 5. Confirm Password Match
+            const confirmPass = document.getElementById('confirmPassword').value;
+            if (confirmPass !== password) {
+                document.getElementById('confirmError').textContent = "Passwords do not match.";
+                isValid = false;
+            }
+
+            // Final Submission
+            if (isValid) {
+                alert("Registration Successful!");
+                document.getElementById('regForm').reset();
+            }
+        }
+    </script>
+</body>
+
+</html>

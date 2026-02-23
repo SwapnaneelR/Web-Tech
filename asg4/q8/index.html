@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 8</title>
+    <style>
+        /* CSS for Layout and Style */
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .slider-container {
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        #slider-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <img id="slider-image" src="" alt="Loading Gallery...">
+        
+        <div class="controls">
+            <button onclick="prevImage()">&laquo; Previous</button>
+            <button onclick="nextImage()">Next &raquo;</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Array of images
+        const images = [
+            "https://picsum.photos/id/1018/600/350",
+            "https://picsum.photos/id/1015/600/350",
+            "https://picsum.photos/id/1019/600/350",
+            "https://picsum.photos/id/1042/600/350"
+        ];
+
+        let currentIndex = 0;
+        const imgElement = document.getElementById("slider-image");
+
+        // Function to update the DOM src
+        function updateImage() {
+            imgElement.src = images[currentIndex];
+        }
+
+        // Logic for Next button
+        function nextImage() {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0; // Loop back to the first image
+            }
+            updateImage();
+            resetTimer(); // Reset auto-slide when user interacts
+        }
+
+        // Logic for Previous button
+        function prevImage() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1; // Loop to the last image
+            }
+            updateImage();
+            resetTimer(); // Reset auto-slide when user interacts
+        }
+
+        // 2. Auto-slide every 3 seconds
+        let autoSlide = setInterval(nextImage, 3000);
+
+        // Helper function to prevent the timer from "jumping" 
+        // immediately after a manual click
+        function resetTimer() {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(nextImage, 3000);
+        }
+
+        // Initialize the first image on load
+        updateImage();
+    </script>
+
+</body>
+</html>

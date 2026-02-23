@@ -1,0 +1,33 @@
+[
+
+    {
+        "id": "1",
+        "name" : "joe",
+        "major" : "IT",
+        "gpa" : "8"
+    },
+    {
+        "id": "2",
+        "name": "Sarah Chen",
+        "major": "Computer Science",
+        "gpa": "9"
+    },
+    {
+        "id": "3",
+        "name": "Marcus Vane",
+        "major": "Computer Science",
+        "gpa": "6"
+    },
+    {
+        "id": "4",
+        "name": "Elena Rodriguez",
+        "major": "Electrical",
+        "gpa": "9.0"
+    },
+    {
+        "id": "5",
+        "name": "Kevin Park",
+        "major": "IT",
+        "gpa": "8.5"
+    }
+]
